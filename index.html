@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-commerce</title>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav position-relative ms-auto align-items-sm-start align-items-md-center ">
+          <li class="nav-item m-2 active">
+            <button class="btn btn-dark border"> Home</button>
+          </li>
+          <li class=" nav-item  m-2">
+            <button class=" btn btn-dark border dropdown-toggle " id=" navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              category
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark cat" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li data-filter="all" class="cat_btn">
+                <button class="dropdown-item btn btn-dark">All</button>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item cart_btn m-2">
+            <button type="button" class="btn btn-dark border position-relative ">
+              Cart
+              <span data-items="0" class=" position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-pill border"> </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
+  </nav>
+  <section class="slider bg-light">
+    <div class="container">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+        <div class=" carousel-inner sle">
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="products pt-5">
+    <div class="container pt-3">
+      <div class="products_area row">
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark p-5">
+    <h1 class="text-center text-light p-5">E-commerce</h1>
+  </footer>
+  <!-- Project -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/all.min.js"></script>
+  <script src="js/app.js" type="module"></script>
+  <script src="js/component.js" type="module"></script>
+</body>
+
+</html>
