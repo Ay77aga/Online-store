@@ -22,9 +22,6 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <ul class="navbar-nav position-relative ms-auto align-items-sm-start align-items-md-center ">
-          <li class="nav-item m-2 active">
-            <button class="btn btn-dark border"> Home</button>
-          </li>
           <li class=" nav-item  m-2">
             <button class=" btn btn-dark border dropdown-toggle " id=" navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               category
@@ -36,11 +33,15 @@
             </ul>
           </li>
 
-          <li class="nav-item cart_btn m-2">
-            <button type="button" class="btn btn-dark border position-relative ">
+          <li class=" nav-item cart_btn m-2">
+            <button type="button" class="cart btn btn-dark border position-relative ">
               Cart
-              <span data-items="0" class=" position-absolute top-0 start-100 translate-middle p-2 bg-danger rounded-pill border"> </span>
+              <span class="cart_nav position-absolute top-0 start-100 translate-middle p-1 fs-6 bg-danger rounded-pill border"> </span>
             </button>
+            <div class="cart_area p-2 bg-dark border">
+
+            </div>
+
           </li>
         </ul>
       </div>
@@ -53,17 +54,18 @@
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
         <div class=" carousel-inner sle">
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+    </div>
 
     </div>
   </section>

@@ -14,21 +14,24 @@
   position: relative;
   overflow: hidden;
 }
-.pro .card-title{
-  height: 70px;
-  overflow: scroll
+
+.pro .card-title {
+  height: 75px;
 }
-.pro .card-text{
+
+.pro .card-text {
   height: 100px;
   overflow: scroll
 }
 
-.cat{
+.cat {
   right: 0;
 }
-.card-body h4{
+
+.card-body h5 {
   position: relative;
 }
+
 .card-body::after {
   content: attr(data-cat);
   position: absolute;
@@ -40,24 +43,78 @@
   font-weight: bold;
 }
 
-.card-body h4::before{
-  content: attr(data-pric);
-  position: absolute;
+.card-body h5::before {
+  content: attr(data-price);
   color: #fff;
+  position: absolute;
   top: 0;
   right: 0;
   font-size: 22px;
   font-weight: bold;
-  background: rgba(0,0,0,.6);
+  background: rgba(0, 0, 0, .6);
   border: 3px solid #28BAF1;
   border-radius: 1rem;
   padding: 5px;
   transform: translateY(-110%)
 }
-.cart_items{
+
+.cart_items {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   min-width: 350px;
+}
+.total::before{
+  content: "Total:  ";
+}
+.total::after{
+  content: " $";
+}
+.items::before {
+  content: "X";
+  font-weight: 200;
+  padding: 5px;
+  color: #fff;
+  font-size: .8em;
+}
+.cart_item .name{
+  width: calc(100% - 10px)
+}
+.cart_area {
+  width: 350px;
+  position: absolute;
+  max-height: 350px;
+  right: 0;
+  overflow: scroll;
+  display: none;
+
+}
+@media (max-width: 767px){
+  .cart_area{
+    left: 50%;
+    transform: translateX(-50%)
+  }
+}
+.cart_area.active {
+  display: block;
+}
+[disabled]{
+  position: relative
+}
+[disabled]::after{
+  content: '';
+  display: inline-block;
+  margin-left: 10px;
+  width: 10px;
+  height: 1.2em;
+  border:  solid darkseagreen;
+  border-width: 0 4px 4px 0 ;
+  transform: rotateZ(35deg) ;
+  
+  
+}
+.cart_img{
+  width: 70px;
+  height: 70px;
 }
