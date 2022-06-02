@@ -114,7 +114,6 @@ function cart_item_logic() {
         });
         this.remove();
         q('.cart_nav').textContent = cart.length;
-
         // console.log(q('.cart_area').children.length)
       }
     })

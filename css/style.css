@@ -1,3 +1,7 @@
+:root {
+  --anim-d: .5s;
+}
+
 .pr_img,
 .sle img {
   width: 170px;
@@ -65,12 +69,15 @@
   transform: translate(-50%, -50%);
   min-width: 350px;
 }
-.total::before{
+
+.total::before {
   content: "Total:  ";
 }
-.total::after{
+
+.total::after {
   content: " $";
 }
+
 .items::before {
   content: "X";
   font-weight: 200;
@@ -78,9 +85,11 @@
   color: #fff;
   font-size: .8em;
 }
-.cart_item .name{
+
+.cart_item .name {
   width: calc(100% - 10px)
 }
+
 .cart_area {
   width: 350px;
   position: absolute;
@@ -90,31 +99,126 @@
   display: none;
 
 }
-@media (max-width: 767px){
-  .cart_area{
+
+@media (max-width: 767px) {
+  .cart_area {
     left: 50%;
     transform: translateX(-50%)
   }
 }
+
 .cart_area.active {
   display: block;
 }
-[disabled]{
+
+[disabled] {
   position: relative
 }
-[disabled]::after{
+
+[disabled]::after {
   content: '';
   display: inline-block;
   margin-left: 10px;
   width: 10px;
   height: 1.2em;
-  border:  solid darkseagreen;
-  border-width: 0 4px 4px 0 ;
-  transform: rotateZ(35deg) ;
-  
-  
+  border: solid darkseagreen;
+  border-width: 0 4px 4px 0;
+  transform: rotateZ(35deg);
+
+
 }
-.cart_img{
+
+.cart_img {
   width: 70px;
   height: 70px;
+}
+
+.loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #324D5F;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader div {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  position: relative;
+  animation: par 2s infinite linear;
+}
+
+.loader span {
+  display: block;
+  height: 60px;
+  width: 60px;
+  border: 5px solid #fff;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.loader span:nth-of-type(1) {
+  top: 0;
+  left: 0;
+  animation: ball1 var(--anim-d) infinite ease-in alternate;
+}
+
+.loader span:nth-of-type(2) {
+  top: 0;
+  right: 0;
+  animation: ball2 var(--anim-d) infinite ease-in alternate;
+}
+
+.loader span:nth-of-type(3) {
+  bottom: 0;
+  left: 0;
+  animation: ball3 var(--anim-d) infinite ease-in alternate;
+}
+
+.loader span:nth-of-type(4) {
+  bottom: 0;
+  right: 0;
+  animation: ball4 var(--anim-d) infinite ease-in alternate;
+}
+
+@keyframes par {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes ball1 {
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes ball2 {
+  100% {
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+}
+
+@keyframes ball3 {
+  100% {
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+@keyframes ball4 {
+  100% {
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+  }
 }

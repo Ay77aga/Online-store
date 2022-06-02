@@ -7,7 +7,8 @@ const request = new XMLHttpRequest();
 request.onload = function() {
   if (request.status === 200) {
     const data = JSON.parse(request.responseText);
-    // console.log(data);
+   q('.loader').remove();
+ // console.log(data);
     let cats = [];
     data.map(m => {
       q('.sle').appendChild(Card(m.id, m.image, m.title, m.description, m.price, m.category, 'carousel-item ', false))
@@ -41,18 +42,18 @@ request.onload = function() {
           cart.forEach(item => {
             cart_item(item.id, item.name, item.src, item.price);
           });
-                     cart_item_logic();
- q('.cart_nav').textContent = cart.length;
+          cart_item_logic();
+          q('.cart_nav').textContent = cart.length;
           this.querySelector('.add').setAttribute('disabled', '');
-
-
         }
       });
     });
 
   } // end if [request state]
 }
-request.open('GET', API, true);
+//remove loader
+
+request.open('GET', API, );
 request.send();
 
 q('.cart').addEventListener('click', function() {
