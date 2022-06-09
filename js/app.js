@@ -1,13 +1,12 @@
-import { Card, q, cat_li, filter, cart_item_logic, cart_item, cart,save,check } from './component.js';
+import { Card, q, cat_li, filter, cart_item_logic, cart_item, cart, save, check } from './component.js';
 const API = "https://fakestoreapi.com/products";
-
 
 
 const request = new XMLHttpRequest();
 request.onreadystatechange = function() {
   if (request.readyState === 4 && request.status === 200) {
     //remove loader
-      q('.loader').remove();
+    q('.loader').remove();
     const data = JSON.parse(request.responseText);
     // console.log(data);
     let cats = [];
@@ -37,13 +36,14 @@ request.onreadystatechange = function() {
             name: this.querySelector('h5').textContent,
             price: this.querySelector('h5').dataset.price,
             src: this.querySelector('img').src,
-            total: 0,
+            total: 1,
           });
+
           save(JSON.stringify(cart));
           // console.log(cart)
           // render in cart data
           cart.forEach(item => {
-            cart_item(item.id, item.name, item.src, item.price,item.total);
+            cart_item(item.id, item.name, item.src, item.price, item.total);
           });
           cart_item_logic();
           q('.cart_nav').textContent = cart.length;
@@ -51,7 +51,7 @@ request.onreadystatechange = function() {
         }
       });
     });
-     check();
+    check();
 
   } // end if [request state]
 }

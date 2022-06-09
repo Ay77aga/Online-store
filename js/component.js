@@ -13,10 +13,16 @@ function check() {
     });
     q('.cart_nav').textContent = cart.length;
     cart_item_logic();
-
-
+    calc_total(cart);
   }
+}
 
+function calc_total(arr) {
+  let result = 0;
+  arr.forEach(pr => {
+    result += pr.total * parseFloat(pr.price);
+  });
+  q('.total_price').textContent = result.toFixed(2) + '  $';
 }
 
 function q(element) {
@@ -110,12 +116,14 @@ function cart_item_logic() {
           }
         });
         save(JSON.stringify(cart));
+        calc_total(cart);
         this.remove();
         q('.cart_nav').textContent = cart.length;
         // console.log(q('.cart_area').children.length)
       }
     })
   });
+  calc_total(cart);
 }
 
 function updatetota(count, id, el, price) {
@@ -123,15 +131,16 @@ function updatetota(count, id, el, price) {
     if (map.id == id) {
       map.total = count;
       el.textContent = (map.total * price).toFixed(2);
+      calc_total(cart);
       save(JSON.stringify(cart));
     }
   });
 
 }
 
-function cart_item(id, product_name, product_img, product_price, total = 0) {
+function cart_item(id, product_name, product_img, product_price, total = 1) {
   let item = document.createElement('div');
-  item.className = "cart_item position-relative  text-light p-2 border mt-2  rounded-3";
+  item.className = "cart_item position-relative  text-light p-1 border m-3 mt-4   rounded-3";
   item.setAttribute("data-id", id);
   let t_p = total * parseFloat(product_price);
   item.innerHTML = `
@@ -153,7 +162,6 @@ function cart_item(id, product_name, product_img, product_price, total = 0) {
 function save(arr) {
   window.localStorage.cart_stor = arr;
 }
-
 export {
   Card,
   q,
