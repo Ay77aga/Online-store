@@ -53,10 +53,10 @@ function Card(id, img_src, title, dis, pr, category, clas = '', en) {
 function cat_li(categorys) {
   for (let i = 0; i < categorys.length; i++) {
     let li = document.createElement('li');
-    li.classList = 'cat_btn';
+    li.classList = 'cat_btn w-100';
 
     let a = document.createElement('button');
-    a.className = "dropdown-item btn btn-dark";
+    a.className = "dropdown-item btn btn-dark d-block w-100";
     a.textContent = categorys[i];
 
     li.setAttribute('data-filter', categorys[i].split('\'')[0]);
