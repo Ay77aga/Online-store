@@ -1,14 +1,15 @@
-import { Card, q, cat_li, filter, cart_item_logic, cart_item, cart } from './component.js';
+import { Card, q, cat_li, filter, cart_item_logic, cart_item, cart,save,check } from './component.js';
 const API = "https://fakestoreapi.com/products";
 
 
 
 const request = new XMLHttpRequest();
-request.onload = function() {
-  if (request.status === 200) {
+request.onreadystatechange = function() {
+  if (request.readyState === 4 && request.status === 200) {
+    //remove loader
+      q('.loader').remove();
     const data = JSON.parse(request.responseText);
-   q('.loader').remove();
- // console.log(data);
+    // console.log(data);
     let cats = [];
     data.map(m => {
       q('.sle').appendChild(Card(m.id, m.image, m.title, m.description, m.price, m.category, 'carousel-item ', false))
@@ -36,11 +37,13 @@ request.onload = function() {
             name: this.querySelector('h5').textContent,
             price: this.querySelector('h5').dataset.price,
             src: this.querySelector('img').src,
+            total: 0,
           });
+          save(JSON.stringify(cart));
           // console.log(cart)
           // render in cart data
           cart.forEach(item => {
-            cart_item(item.id, item.name, item.src, item.price);
+            cart_item(item.id, item.name, item.src, item.price,item.total);
           });
           cart_item_logic();
           q('.cart_nav').textContent = cart.length;
@@ -48,11 +51,10 @@ request.onload = function() {
         }
       });
     });
+     check();
 
   } // end if [request state]
 }
-//remove loader
-
 request.open('GET', API, );
 request.send();
 

@@ -1,7 +1,6 @@
 :root {
   --anim-d: .5s;
 }
-
 .pr_img,
 .sle img {
   width: 170px;
@@ -138,6 +137,7 @@
   width: 100vw;
   height: 100vh;
   background: #324D5F;
+  opacity: .4;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -145,8 +145,8 @@
 }
 
 .loader div {
-  width: 250px;
-  height: 250px;
+  width: 100px;
+  height: 100px;
   margin: auto;
   position: relative;
   animation: par 2s infinite linear;
@@ -164,25 +164,21 @@
 .loader span:nth-of-type(1) {
   top: 0;
   left: 0;
-  animation: ball1 var(--anim-d) infinite ease-in alternate;
 }
 
 .loader span:nth-of-type(2) {
   top: 0;
   right: 0;
-  animation: ball2 var(--anim-d) infinite ease-in alternate;
 }
 
 .loader span:nth-of-type(3) {
   bottom: 0;
   left: 0;
-  animation: ball3 var(--anim-d) infinite ease-in alternate;
 }
 
 .loader span:nth-of-type(4) {
   bottom: 0;
   right: 0;
-  animation: ball4 var(--anim-d) infinite ease-in alternate;
 }
 
 @keyframes par {
@@ -191,34 +187,3 @@
   }
 }
 
-@keyframes ball1 {
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes ball2 {
-  100% {
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-  }
-}
-
-@keyframes ball3 {
-  100% {
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-  }
-}
-
-@keyframes ball4 {
-  100% {
-    bottom: 50%;
-    right: 50%;
-    transform: translate(50%, 50%);
-  }
-}
