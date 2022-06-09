@@ -1,7 +1,10 @@
 ٠:root {
   --anim-d: .5s;
 }
-
+body,
+.slider{
+  background:hsl(218, 23%, 16%);
+}
 nav {
   position: fixed;
   bottom: 15px;
@@ -9,7 +12,7 @@ nav {
   transform: translateX(-50%);
   background: rgba(0, 0, 0, .7);
   height: 60px;
-  z-index: 9999
+  z-index: 9999;
 }
 
 ul {
@@ -55,12 +58,18 @@ nav ul li {
 .card-body h5 {
   position: relative;
 }
-
+.card{
+  background: hsl(217, 19%, 24%);
+  color: hsl(193, 38%, 86%);
+  border-radius: 1rem;
+  
+}
 .card-body::after {
   content: attr(data-cat);
   position: absolute;
   top: 0;
-  right: .5rem;
+  border-radius: 1rem;
+  right: 0;
   padding: 10px;
   background: #0b5ed7;
   color: #fff;
@@ -117,7 +126,7 @@ nav ul li {
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  transition: all 1s;
+  transition: all .5s .3s;
   height: 0;
   overflow: scroll;
 
@@ -181,7 +190,7 @@ nav ul li {
   width: 100vw;
   height: 100vh;
   background: #324D5F;
-  opacity: .4;
+  opacity: .8;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -228,5 +237,20 @@ nav ul li {
 @keyframes par {
   100% {
     transform: rotateZ(360deg);
+  }
+}
+.anim{
+  animation: pop .5s both linear ;
+}
+.animrev{
+    animation: pop .5s both linear reverse;
+
+}
+@keyframes pop{
+  50%{
+    transform: scale(.2);
+  }
+  100%{
+    transform: scale(1);
   }
 }

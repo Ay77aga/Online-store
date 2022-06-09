@@ -13,7 +13,6 @@ function check() {
     });
     q('.cart_nav').textContent = cart.length;
     cart_item_logic();
-    calc_total(cart);
   }
 }
 
@@ -31,12 +30,12 @@ function q(element) {
 
 function Card(id, img_src, title, dis, pr, category, clas = '', en) {
   let div = document.createElement('div');
-  div.className = `col-md-6 col-lg-4 p-2 pro  all ${clas}  ${category.split('\'')[0]}`;
+  div.className = `col-md-6 col-lg-4 p-2 pro   all ${clas}  ${category.split('\'')[0]}`;
   let btn = `
   <button class="btn btn-primary w-75 d-block m-auto add"> Add Cart</button>
 `;
   div.innerHTML = `
-  <div class="card bg-light ${en? 'xd':''}" data-id="${id}">
+  <div class="card ${en? 'xd':''}" data-id="${id}">
     <img class="img-fluid pr_img m-auto mt-5" src="${img_src}" alt="card_img">
     <div class="card-body" data-cat="${category}" data-id="${id}">
       <h5 class="card-title" data-price="${pr} $">${title}</h5>
@@ -89,18 +88,22 @@ function cart_item_logic() {
       let price = parseFloat(this.querySelector('.price').textContent);
       if (e.target.classList.contains('plus')) {
         if (count < 20) {
+          e.target.classList.remove('anim')
           count = parseInt(count) + 1;
           this.querySelector('.items').textContent = count;
           this.querySelector('.count').textContent = count;
           updatetota(count, this.dataset.id, this.querySelector('.total'), price);
+          setTimeout(() => e.target.classList.add('anim'), 0);
 
         }
       } else if (e.target.classList.contains('min')) {
         if (count > 0) {
+          e.target.classList.remove('anim')
           count = parseInt(count) - 1;
           this.querySelector('.items').textContent = count;
-          this.querySelector('.count').textContent = count
+          this.querySelector('.count').textContent = count;
           updatetota(count, this.dataset.id, this.querySelector('.total'), price);
+          setTimeout(() => e.target.classList.add('anim'), 0);
         }
       } else if (e.target.classList.contains('rm-rf')) {
         cart.map(ma => {
@@ -111,15 +114,22 @@ function cart_item_logic() {
             btns.forEach(bt => {
               if (bt.dataset.id == this.dataset.id) {
                 bt.querySelector('.add').removeAttribute('disabled');
+                setTimeout(() => bt.querySelector('.add').classList.remove('anim'), 0)
               }
             })
           }
         });
+        q('.cart_item').classList.remove('anim');
         save(JSON.stringify(cart));
         calc_total(cart);
-        this.remove();
         q('.cart_nav').textContent = cart.length;
         // console.log(q('.cart_area').children.length)
+        setTimeout(() => q('.cart_item').classList.add('animrev'), 0);
+        setTimeout(() => this.remove(), 400);
+        if (cart.length == 0) {
+          q('.cart_area').classList.toggle('active')
+
+        }
       }
     })
   });

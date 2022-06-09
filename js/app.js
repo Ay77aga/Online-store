@@ -28,6 +28,7 @@ request.onreadystatechange = function() {
     let add_btns = Array.from(document.querySelectorAll('.pro'))
     add_btns.forEach(btn => {
       btn.addEventListener('click', function(e) {
+        this.querySelector('.add').classList.add('anim');
         if (e.target.classList.contains('add')) {
           q('.cart_area').textContent = '';
           // catch product data
@@ -38,7 +39,6 @@ request.onreadystatechange = function() {
             src: this.querySelector('img').src,
             total: 1,
           });
-
           save(JSON.stringify(cart));
           // console.log(cart)
           // render in cart data
@@ -60,5 +60,9 @@ request.send();
 
 q('.cart').addEventListener('click', function() {
   q('.cart_area').classList.toggle('active')
-  // console.log('cart')
+  document.querySelectorAll('.cart_area .cart_item').forEach((el,i) => {
+    el.classList.remove('anim');
+    setTimeout(() => el.classList.add('anim'), i * 300);
+
+  })
 });
