@@ -42,26 +42,33 @@ function Card(id, img_src, title, dis, pr, category, clas = '', en) {
       <p class="card-text  mt-2">${dis}</p>
       ${en ? btn : ''}
   </div>
-  </div>
-`;
+  </div>`;
 
 
   return div;
 }
 
-function cat_li(categorys) {
-  for (let i = 0; i < categorys.length; i++) {
-    let li = document.createElement('li');
-    li.classList = 'cat_btn w-100';
+function cat_li() {
+  fetch('https://fakestoreapi.com/products/categories')
+    .then(res => res.json())
+    .then(categorys => {
+      for (let i = 0; i < categorys.length; i++) {
+        let li = document.createElement('li');
+        li.classList = 'cat_btn w-100';
 
-    let a = document.createElement('button');
-    a.className = "dropdown-item btn btn-dark d-block w-100";
-    a.textContent = categorys[i];
+        let a = document.createElement('button');
+        a.className = "dropdown-item btn btn-dark d-block w-100";
+        a.textContent = categorys[i];
 
-    li.setAttribute('data-filter', categorys[i].split('\'')[0]);
-    li.appendChild(a);
-    q('.cat').appendChild(li);
-  }
+        li.setAttribute('data-filter', categorys[i].split('\'')[0]);
+        li.appendChild(a);
+        q('.cat').appendChild(li);
+      }
+      //  filter items by category
+      filter(document.querySelectorAll('.cat_btn'));
+
+    });
+
 }
 
 function filter(arr) {
@@ -76,7 +83,8 @@ function filter(arr) {
           }
         });
     });
-  })
+  });
+
 }
 
 function cart_item_logic() {
@@ -94,9 +102,9 @@ function cart_item_logic() {
           this.querySelector('.count').textContent = count;
           updatetota(count, this.dataset.id, this.querySelector('.total'), price);
           setTimeout(() => e.target.classList.add('anim'), 0);
-
         }
-      } else if (e.target.classList.contains('min')) {
+      } // end plus 
+      else if (e.target.classList.contains('min')) {
         if (count > 0) {
           e.target.classList.remove('anim')
           count = parseInt(count) - 1;
@@ -105,7 +113,9 @@ function cart_item_logic() {
           updatetota(count, this.dataset.id, this.querySelector('.total'), price);
           setTimeout(() => e.target.classList.add('anim'), 0);
         }
-      } else if (e.target.classList.contains('rm-rf')) {
+      } // end subtract
+      else if (e.target.classList.contains('rm-rf')) {
+        // remove item 
         cart.map(ma => {
           if (ma.id == this.dataset.id) {
             let index = cart.indexOf(ma)
@@ -116,25 +126,39 @@ function cart_item_logic() {
                 bt.querySelector('.add').removeAttribute('disabled');
                 setTimeout(() => bt.querySelector('.add').classList.remove('anim'), 0)
               }
-            })
+            });
           }
         });
-        q('.cart_item').classList.remove('anim');
         save(JSON.stringify(cart));
-        calc_total(cart);
         q('.cart_nav').textContent = cart.length;
-        // console.log(q('.cart_area').children.length)
-        setTimeout(() => q('.cart_item').classList.add('animrev'), 0);
-        setTimeout(() => this.remove(), 400);
-        if (cart.length == 0) {
-          q('.cart_area').classList.toggle('active')
+        this.remove()
+        if (cart.length == 0) q('.cart_area').classList.toggle('active');
 
-        }
-      }
-    })
-  });
+      } // end remove 
+      else if (e.target.classList.contains('acc')) {
+        accept(this.dataset.id);
+        this.querySelector('.rm-rf').click();
+
+      } // end Accept
+    }); // end click event
+  }); // end loop items
   calc_total(cart);
 }
+
+function accept(elId) {
+  cart.forEach(item => {
+    if (item.id === elId) {
+      let info = {
+        id: item.id,
+        count: item.total,
+        total_price: parseFloat(item.price) * item.total,
+      }
+      console.log(info);
+      window.location.href = `mailto:bassel444555@gmail.com?subject=${item.name}&body= ${JSON.stringify(info)}`;
+    }
+  });
+}
+
 
 function updatetota(count, id, el, price) {
   cart.map(map => {
@@ -159,7 +183,7 @@ function cart_item(id, product_name, product_img, product_price, total = 1) {
   <button class=" rm-rf btn p-1 btn-danger end-0 top-0 position-absolute fw-bold">X</button>
   <div class="d-flex align-items-center justify-content-between">
     <img src="${product_img}" alt="product_img" class=" cart_img rounded-3">
-    <span class="price">${product_price} $</span><span class="items text-primary fw-bold fs-4">${total}</span>
+    <span class="price">${product_price}</span><span class="items text-primary fw-bold fs-4">${total}</span>
     <div>
       <span class="btn btn-dark border min">-</span><span class="btn btn-dark border count ms-1 me-1">${total}</span><span class="btn btn-dark border plus">+</span>
     </div>
@@ -172,6 +196,7 @@ function cart_item(id, product_name, product_img, product_price, total = 1) {
 function save(arr) {
   window.localStorage.cart_stor = arr;
 }
+
 export {
   Card,
   q,

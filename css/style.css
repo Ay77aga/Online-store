@@ -14,7 +14,9 @@ nav {
   height: 60px;
   z-index: 9999;
 }
-
+a{
+  text-decoration: none;
+}
 ul {
   list-style: none;
 }
