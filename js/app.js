@@ -29,7 +29,7 @@ request.onreadystatechange = function() {
     let add_btns = Array.from(document.querySelectorAll('.pro'))
     add_btns.forEach(btn => {
       btn.addEventListener('click', function(e) {
-        
+
         if (e.target.classList.contains('add')) {
           q('.cart_area').textContent = '';
           this.querySelector('.add').classList.add('anim');

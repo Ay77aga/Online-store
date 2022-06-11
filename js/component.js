@@ -5,9 +5,12 @@ let user_info = {
 };
 
 function check() {
+  login();
+
   if (window.localStorage.user_info) {
     user_info = JSON.parse(window.localStorage.user_info)
     console.log(user_info);
+    q('.user-info').dataset.name = user_info.name
     q('.form').remove();
   }
   if (window.localStorage.cart_stor) {
@@ -24,6 +27,7 @@ function check() {
     cart_item_logic();
   }
 }
+
 
 function calc_total(arr) {
   let result = 0;
@@ -50,7 +54,7 @@ function Card(id, img_src, title, dis, pr, category, clas = '', en) {
       <h5 class="card-title" data-price="${pr} $">${title}</h5>
       <p class="card-text  mt-2">${dis}</p>
       ${en ? btn : ''}
-  </div>
+    </div>
   </div>`;
 
 
@@ -257,8 +261,8 @@ function login() {
       q('.form').remove();
     }
   });
+
 }
-login();
 export {
   Card,
   q,

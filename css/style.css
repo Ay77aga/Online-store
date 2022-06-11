@@ -30,7 +30,37 @@ nav ul li {
   width: calc(90% / 3);
 }
 
-.user-info {}
+.user-info {
+  position: relative;
+}
+
+.user-info::before,
+.category::after,
+.cart_btn::after{
+  content: attr(data-name);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, .7);
+  border-radius: 1rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all .4s;
+  opacity: 1;
+  z-index: -1;
+  border: 2px solid #fff;
+  opacity: 0;
+}
+.user-info:hover::before,
+.category:hover::after,
+.cart_btn:hover::after{
+  opacity: 1;
+  z-index: 1;
+  transform: translate(-50%, -110%);
+}
 
 .cart_form {
   color: #fff;
