@@ -144,6 +144,10 @@ function cart_item_logic() {
         if (cart.length == 0) {
           q('.cart_area').classList.toggle('active');
         }
+        if(total_items.length != 0 && cart.length == 0){
+          window.location.href = `mailto:bassel444555@gmail.com?subject=Buy items&body=my phone is: {${user_info.phone}}${JSON.stringify(total_items)}`;
+          total_items = [];
+        }
       } // end remove 
       else if (e.target.classList.contains('acc')) {
         accept(this.dataset.id);
