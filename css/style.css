@@ -12,7 +12,8 @@ nav {
   transform: translateX(-50%);
   background: rgba(0, 0, 0, .7);
   height: 60px;
-  z-index: 9999;
+  z-index: 100;
+  width: 80%;
 }
 a{
   text-decoration: none;
@@ -22,10 +23,13 @@ ul {
 }
 
 nav ul li {
-  width: calc(90% / 2);
+  width: calc(90% / 3);
 }
-
-
+.user-info{
+}
+.cart_form{
+  color: #fff;
+}
 
 .pr_img,
 .sle img {
@@ -43,7 +47,21 @@ nav ul li {
   position: relative;
   overflow: hidden;
 }
-
+.form{
+  position: fixed;
+  z-index: 300;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .9)
+}
+.validation{
+  position: absolute;
+  top: -70%;
+  right: 0;
+}
+.user{
+  width: 300px;
+}
 .pro .card-title {
   height: 75px;
 }
@@ -127,7 +145,7 @@ nav ul li {
   top: 0%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 200;
   transition: all .5s .3s;
   height: 0;
   overflow: scroll;

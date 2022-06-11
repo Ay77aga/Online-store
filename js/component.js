@@ -1,6 +1,15 @@
 let cart = [];
+let user_info = {
+  name: '',
+  phone: '',
+};
 
 function check() {
+  if (window.localStorage.user_info) {
+    user_info = JSON.parse(window.localStorage.user_info)
+    console.log(user_info);
+    q('.form').remove();
+  }
   if (window.localStorage.cart_stor) {
     cart = JSON.parse(window.localStorage.cart_stor)
     cart.forEach(item => {
@@ -132,18 +141,27 @@ function cart_item_logic() {
         save(JSON.stringify(cart));
         q('.cart_nav').textContent = cart.length;
         this.remove()
-        if (cart.length == 0) q('.cart_area').classList.toggle('active');
-
+        if (cart.length == 0) {
+          q('.cart_area').classList.toggle('active');
+        }
       } // end remove 
       else if (e.target.classList.contains('acc')) {
         accept(this.dataset.id);
         this.querySelector('.rm-rf').click();
+        if (cart.length == 0) {
+          window.location.href = `mailto:bassel444555@gmail.com?subject=Buy items&body=my phone is: {${user_info.phone}}${JSON.stringify(total_items)}`;
+          total_items = [];
+        } // sent cart items to email and end step
 
       } // end Accept
+      calc_total(cart);
+
     }); // end click event
+    calc_total(cart);
+
   }); // end loop items
-  calc_total(cart);
 }
+let total_items = [];
 
 function accept(elId) {
   cart.forEach(item => {
@@ -153,10 +171,10 @@ function accept(elId) {
         count: item.total,
         total_price: parseFloat(item.price) * item.total,
       }
-      console.log(info);
-      window.location.href = `mailto:bassel444555@gmail.com?subject=${item.name}&body= ${JSON.stringify(info)}`;
+      total_items.push(info);
     }
   });
+  console.log(total_items);
 }
 
 
@@ -197,6 +215,47 @@ function save(arr) {
   window.localStorage.cart_stor = arr;
 }
 
+function check_valid() {
+  let valedName = /^[a-zA-Z ]{3,20}$/;
+  let valedNum = /^[0-9]{11,11}$/;
+  let v = false;
+  q('#name').oninput = function() {
+    if (valedName.test(q('#name').value)) {
+      q('.name .validation').textContent = 'yor name is valid'
+      q('.name .validation').classList.remove('bg-danger')
+      q('.name .validation').classList.add('bg-success')
+    } else {
+      q('.name .validation').textContent = 'yor number isn\'t valid'
+      q('.name .validation').classList.add('bg-danger')
+    }
+  }
+  q('#phone').oninput = function() {
+    if (valedNum.test(q('#phone').value)) {
+      q('.phone .validation').textContent = 'yor number is valid';
+      q('.phone .validation').classList.remove('bg-danger')
+      q('.phone .validation').classList.add('bg-success')
+    }
+    else {
+      q('.phone .validation').textContent = 'yor number isn\'t valid'
+      q('.phone .validation').classList.add('bg-danger');
+    }
+  }
+  return valedName.test(q('#name').value) && valedNum.test(q('#phone').value)
+}
+
+function login() {
+  check_valid();
+  q('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (check_valid()) {
+      user_info.name = q('#name').value;
+      user_info.phone = q('#phone').value;
+      window.localStorage.user_info = JSON.stringify(user_info);
+      q('.form').remove();
+    }
+  });
+}
+login();
 export {
   Card,
   q,
