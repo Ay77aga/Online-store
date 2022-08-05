@@ -232,7 +232,7 @@ function check_valid() {
       q('.name .validation').classList.remove('bg-danger')
       q('.name .validation').classList.add('bg-success')
     } else {
-      q('.name .validation').textContent = 'yor number isn\'t valid'
+      q('.name .validation').textContent = 'yor name isn\'t valid'
       q('.name .validation').classList.add('bg-danger')
     }
   }
